@@ -1,5 +1,6 @@
 package com.zsq.blcokchainexplorer.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zsq.blcokchainexplorer.api.BitcoinJsonRpcClient;
 import com.zsq.blcokchainexplorer.api.BitecoinApi;
@@ -20,9 +21,12 @@ public class TempController {
     @Autowired
     private BitcoinJsonRpcClient bitcoinJsonRpcClient;
 
-    @GetMapping
-    public void test(){
-        JSONObject chainInfo = bitecoinApi.getChainInfo();
+    @GetMapping("/test")
+    public Object test(){
+        //JSONObject chainInfo = bitecoinApi.getChainInfo();
+        JSONArray blockHeaders = bitecoinApi.getBlockHeaders(10, "000000000ac483a02f993b9f785da7b81ba83af62dcac6ed049e93e9432149fb");
+
+        return blockHeaders;
         /*String txhash = "";
         JSONObject transaction = bitecoinApi.getTransaction(txhash);
 */
