@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zsq.blcokchainexplorer.dao.BlockMapper">
+  <resultMap id="BaseResultMap" type="com.zsq.blcokchainexplorer.po.Block">
+    <id column="blockhash" jdbcType="CHAR" property="blockhash" />
+    <result column="blockchain_id" jdbcType="INTEGER" property="blockchainId" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="tx_size" jdbcType="INTEGER" property="txSize" />
+    <result column="size_on_disk" jdbcType="BIGINT" property="sizeOnDisk" />
+    <result column="difficulty" jdbcType="DOUBLE" property="difficulty" />
+    <result column="prev_blockhash" jdbcType="CHAR" property="prevBlockhash" />
+    <result column="next_blockhash" jdbcType="CHAR" property="nextBlockhash" />
+    <result column="output_total" jdbcType="DOUBLE" property="outputTotal" />
+    <result column="transaction_fees" jdbcType="DOUBLE" property="transactionFees" />
+    <result column="merkle_root" jdbcType="CHAR" property="merkleRoot" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blockhash, blockchain_id, height, time, tx_size, size_on_disk, difficulty, prev_blockhash, 
+    next_blockhash, output_total, transaction_fees, merkle_root
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from block
+    where blockhash = #{blockhash,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from block
+    where blockhash = #{blockhash,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zsq.blcokchainexplorer.po.Block">
+    insert into block (blockhash, blockchain_id, height, 
+      time, tx_size, size_on_disk, 
+      difficulty, prev_blockhash, next_blockhash, 
+      output_total, transaction_fees, merkle_root
+      )
+    values (#{blockhash,jdbcType=CHAR}, #{blockchainId,jdbcType=INTEGER}, #{height,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP}, #{txSize,jdbcType=INTEGER}, #{sizeOnDisk,jdbcType=BIGINT}, 
+      #{difficulty,jdbcType=DOUBLE}, #{prevBlockhash,jdbcType=CHAR}, #{nextBlockhash,jdbcType=CHAR}, 
+      #{outputTotal,jdbcType=DOUBLE}, #{transactionFees,jdbcType=DOUBLE}, #{merkleRoot,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zsq.blcokchainexplorer.po.Block">
+    insert into block
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blockhash != null">
+        blockhash,
+      </if>
+      <if test="blockchainId != null">
+        blockchain_id,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="txSize != null">
+        tx_size,
+      </if>
+      <if test="sizeOnDisk != null">
+        size_on_disk,
+      </if>
+      <if test="difficulty != null">
+        difficulty,
+      </if>
+      <if test="prevBlockhash != null">
+        prev_blockhash,
+      </if>
+      <if test="nextBlockhash != null">
+        next_blockhash,
+      </if>
+      <if test="outputTotal != null">
+        output_total,
+      </if>
+      <if test="transactionFees != null">
+        transaction_fees,
+      </if>
+      <if test="merkleRoot != null">
+        merkle_root,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blockhash != null">
+        #{blockhash,jdbcType=CHAR},
+      </if>
+      <if test="blockchainId != null">
+        #{blockchainId,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txSize != null">
+        #{txSize,jdbcType=INTEGER},
+      </if>
+      <if test="sizeOnDisk != null">
+        #{sizeOnDisk,jdbcType=BIGINT},
+      </if>
+      <if test="difficulty != null">
+        #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="prevBlockhash != null">
+        #{prevBlockhash,jdbcType=CHAR},
+      </if>
+      <if test="nextBlockhash != null">
+        #{nextBlockhash,jdbcType=CHAR},
+      </if>
+      <if test="outputTotal != null">
+        #{outputTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="transactionFees != null">
+        #{transactionFees,jdbcType=DOUBLE},
+      </if>
+      <if test="merkleRoot != null">
+        #{merkleRoot,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zsq.blcokchainexplorer.po.Block">
+    update block
+    <set>
+      <if test="blockchainId != null">
+        blockchain_id = #{blockchainId,jdbcType=INTEGER},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="txSize != null">
+        tx_size = #{txSize,jdbcType=INTEGER},
+      </if>
+      <if test="sizeOnDisk != null">
+        size_on_disk = #{sizeOnDisk,jdbcType=BIGINT},
+      </if>
+      <if test="difficulty != null">
+        difficulty = #{difficulty,jdbcType=DOUBLE},
+      </if>
+      <if test="prevBlockhash != null">
+        prev_blockhash = #{prevBlockhash,jdbcType=CHAR},
+      </if>
+      <if test="nextBlockhash != null">
+        next_blockhash = #{nextBlockhash,jdbcType=CHAR},
+      </if>
+      <if test="outputTotal != null">
+        output_total = #{outputTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="transactionFees != null">
+        transaction_fees = #{transactionFees,jdbcType=DOUBLE},
+      </if>
+      <if test="merkleRoot != null">
+        merkle_root = #{merkleRoot,jdbcType=CHAR},
+      </if>
+    </set>
+    where blockhash = #{blockhash,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zsq.blcokchainexplorer.po.Block">
+    update block
+    set blockchain_id = #{blockchainId,jdbcType=INTEGER},
+      height = #{height,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      tx_size = #{txSize,jdbcType=INTEGER},
+      size_on_disk = #{sizeOnDisk,jdbcType=BIGINT},
+      difficulty = #{difficulty,jdbcType=DOUBLE},
+      prev_blockhash = #{prevBlockhash,jdbcType=CHAR},
+      next_blockhash = #{nextBlockhash,jdbcType=CHAR},
+      output_total = #{outputTotal,jdbcType=DOUBLE},
+      transaction_fees = #{transactionFees,jdbcType=DOUBLE},
+      merkle_root = #{merkleRoot,jdbcType=CHAR}
+    where blockhash = #{blockhash,jdbcType=CHAR}
+  </update>
+</mapper>
