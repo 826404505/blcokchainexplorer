@@ -182,7 +182,7 @@ successResponse{
 | merkleRoot | 5e835c107f7b90a0fc637a36c432b5b9b18b7ccb3ae745760ddb25a74ce78643 |
 | ... |
 
-### 1.4 通过块的HASH值 获取block的详细信息
+### 2.4 通过块的HASH值 获取block的详细信息
 ```
 调用该API 通过块的HASH值获取该块的详细信息
 ```
