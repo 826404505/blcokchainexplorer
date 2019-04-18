@@ -28,8 +28,8 @@ public class TempController {
 
         return blockHeaders;
         /*String txhash = "";
-        JSONObject transaction = bitecoinApi.getTransaction(txhash);
-*/
+        JSONObject transaction = bitecoinApi.getTransaction(txhash);*/
+
 
     }
 
