@@ -19,6 +19,12 @@
     blockhash, blockchain_id, height, time, tx_size, size_on_disk, difficulty, prev_blockhash, 
     next_blockhash, output_total, transaction_fees, merkle_root
   </sql>
+
+  <!--custom sql-->
+  <update id="truncate">
+      truncate table block;
+  </update>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

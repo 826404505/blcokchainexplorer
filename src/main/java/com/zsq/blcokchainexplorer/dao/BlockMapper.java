@@ -3,6 +3,9 @@ package com.zsq.blcokchainexplorer.dao;
 import com.zsq.blcokchainexplorer.po.Block;
 
 public interface BlockMapper {
+
+    int truncate();
+
     int deleteByPrimaryKey(String blockhash);
 
     int insert(Block record);
