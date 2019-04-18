@@ -1,5 +1,7 @@
 package com.zsq.blcokchainexplorer.api;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +33,32 @@ public class BitcoinJsonRpcClient {
         jsonRpcHttpClient = new JsonRpcHttpClient(new URL("http://localhost:18332"),header);
     }
 
+    /**
+     * 根据height得到block的hash值
+     * @param blcokHeight
+     * @return
+     * @throws Throwable
+     */
     public String getBlockHashByHeight(Integer blcokHeight) throws Throwable {
-        String blockhash = jsonRpcHttpClient.invoke("getblockhash",new Integer[]{blcokHeight},String.class);
-        return "";
+        String blockHash = jsonRpcHttpClient.invoke("getblockhash",new Integer[]{blcokHeight},String.class);
+        return blockHash;
     }
+
+    /**
+     * 通过address得到余额
+     * @param address
+     * @return
+     */
+    public Double getBalance(String address) throws Throwable {
+        //调用方法得到JSONArray类型的余额
+        JSONArray balances = jsonRpcHttpClient.invoke("listunspent", new Object[]{6, 9999999, new String[]{address}}, JSONArray.class);
+        //把JSONArray类型的balances转换成JSONObject类型的
+        JSONObject balance = balances.getJSONObject(0);
+        //把JSONObject类型的balance转换成Double
+        Double amount = balance.getDouble("amount");
+        return amount;
+    }
+
+
 
 }

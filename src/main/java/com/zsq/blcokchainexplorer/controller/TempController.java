@@ -22,13 +22,17 @@ public class TempController {
     private BitcoinJsonRpcClient bitcoinJsonRpcClient;
 
     @GetMapping("/test")
-    public Object test(){
+    public Object test() throws Throwable {
         //JSONObject chainInfo = bitecoinApi.getChainInfo();
         JSONArray blockHeaders = bitecoinApi.getBlockHeaders(10, "000000000ac483a02f993b9f785da7b81ba83af62dcac6ed049e93e9432149fb");
+
+        /*String address = "";
+        Double balance = bitcoinJsonRpcClient.getBalance(address);*/
 
         return blockHeaders;
         /*String txhash = "";
         JSONObject transaction = bitecoinApi.getTransaction(txhash);*/
+
 
 
     }
