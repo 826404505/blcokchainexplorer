@@ -62,16 +62,12 @@ public class BitcoinJsonRpcClient {
     /**
      * 根据txid查找交易记录
      * @param txid
-     * @param n
      * @return
      * @throws Throwable
      */
-    public JSONObject getRawTransaxtion(String txid, Integer n) throws Throwable {
+    public JSONObject getRawTransaxtion(String txid) throws Throwable {
         JSONObject rawTransaction = jsonRpcHttpClient.invoke("getrawtransaction", new Object[]{txid, true}, JSONObject.class);
 
         return rawTransaction;
     }
-
-
-
 }

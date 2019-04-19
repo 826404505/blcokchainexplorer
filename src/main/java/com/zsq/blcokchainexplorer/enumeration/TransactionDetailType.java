@@ -1,6 +1,6 @@
 package com.zsq.blcokchainexplorer.enumeration;
 
-public enum TrasactionDetailType {
+public enum TransactionDetailType {
     Reward,
     Send,
     Receive
