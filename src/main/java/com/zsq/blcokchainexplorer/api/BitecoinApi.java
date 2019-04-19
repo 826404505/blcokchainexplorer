@@ -37,4 +37,9 @@ public interface BitecoinApi {
     @GetMapping("/rest/mempool/contents.json")
     JSONObject getMempoolContents();
 
+    //根据txid查找
+    @GetMapping("/restgetutxos/{txid}-{n}.json")
+    JSONObject restgetutxos(@PathVariable("txid") String txid, @PathVariable("n") Integer n);
+
+
 }
