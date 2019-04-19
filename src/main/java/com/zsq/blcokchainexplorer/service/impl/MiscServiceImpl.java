@@ -90,10 +90,18 @@ public class MiscServiceImpl implements MiscService {
 
     }
 
+    /**
+     * 往数据库里面插入交易记录
+     * @param tx
+     * @param blockhash
+     * @param time
+     * @throws Throwable
+     */
     public void inportTx(JSONObject tx, String blockhash, Date time) throws Throwable {
         Transaction transaction = new Transaction();
         String txid = tx.getString("txid");
         transaction.setTxid(txid);
+
         transaction.setTxhash(tx.getString("hash"));
         transaction.setBlockhash(blockhash);
         transaction.setSize(tx.getLong("size"));
@@ -102,14 +110,15 @@ public class MiscServiceImpl implements MiscService {
         transactionMapper.insert(transaction);
 
         JSONArray vouts = tx.getJSONArray("vout");
+        //循环调用importVoutDetail方法，插入输出out的交易记录
         for (int i = 0; i < vouts.size(); i++) {
             importVoutDetail(vouts.getJSONObject(i),txid);
         }
 
         JSONArray vins = tx.getJSONArray("vin");
 
-        //todo vin0 coinbase tx
 
+        //循环调用方法，插入输出out的交易记录
         for (int i = 1; i < vins.size(); i++) {
             importVinDetail(vins.getJSONObject(i),txid);
         }
