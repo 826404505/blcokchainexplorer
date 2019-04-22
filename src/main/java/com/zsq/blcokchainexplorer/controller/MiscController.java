@@ -23,6 +23,7 @@ public class MiscController {
         return null;
     }
 
+    //通过height插入
     @GetMapping("/importFromHigh")
     public void importFromHigh(@RequestParam Integer blockhight,
                                @RequestParam(required = false, defaultValue = "false") Boolean isClean) throws Throwable {
@@ -30,6 +31,7 @@ public class MiscController {
         miscService.importFromHeight(blockhight,isClean);
     }
 
+    //通过hash插入
     @GetMapping("/importFromHash")
     public void importFromHash(@RequestParam String blockhash,
                                @RequestParam(required = false, defaultValue = "false") Boolean isClean) throws Throwable {
@@ -37,6 +39,7 @@ public class MiscController {
         miscService.importFromHash(blockhash,isClean);
     }
 
+    //得到插入的状态
     @GetMapping("/getImportState")
     public ImportStateDTO getImportState(){
 

@@ -20,12 +20,14 @@ public class AddressController {
      * getBlockDetailByHeight通过height查询block的详细信息
      */
 
+    //查找地址的详细信息
     @GetMapping("/getAddressInfo")
     public AddressInfo getAddressInfo(@RequestParam String address){
 
         return null;
     }
 
+    //根据交易地址得到交易
     @GetMapping("/getAddressTransactions")
     public List<TransactionInBlockDTO> getAddressTransactions(@RequestParam String address,
                                                               @RequestParam(required = false, defaultValue = "false") Boolean isClean,
