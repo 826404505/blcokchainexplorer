@@ -48,10 +48,12 @@ public class MiscServiceImpl implements MiscService {
 
     @Async
     @Override
-    public void importFromHash(String blockHash, Boolean isClean) {
+    public void importFromHash(String blockHash, Boolean isClean) throws Throwable {
         //判断是否是isClean
         if (isClean){
             blockMapper.truncate();
+            transactionMapper.truncate();
+            transactionDetailMapper.truncate();
         }
 
         String temphash = blockHash;
@@ -72,6 +74,11 @@ public class MiscServiceImpl implements MiscService {
             Date date = new Date(time * 1000);
             block.setTime(date);
             JSONArray tx = blockOrigin.getJSONArray("tx");
+
+            for (int i =0; i<tx.size(); i++){
+                importTx(tx.getJSONObject(i),temphash,date);
+            }
+
             block.setTxSize(tx.size());
             block.setSizeOnDisk(blockOrigin.getLong("size"));
             block.setDifficulty(blockOrigin.getDouble("difficulty"));
@@ -97,7 +104,7 @@ public class MiscServiceImpl implements MiscService {
      * @param time
      * @throws Throwable
      */
-    public void inportTx(JSONObject tx, String blockhash, Date time) throws Throwable {
+    public void importTx(JSONObject tx, String blockhash, Date time) throws Throwable {
         Transaction transaction = new Transaction();
         String txid = tx.getString("txid");
         transaction.setTxid(txid);
@@ -155,6 +162,7 @@ public class MiscServiceImpl implements MiscService {
      * @throws Throwable
      */
     public void importVinDetail(JSONObject vin, String txidOrigin) throws Throwable {
+
         String txid = vin.getString("txid");
         Integer vout = vin.getInteger("vout");
 

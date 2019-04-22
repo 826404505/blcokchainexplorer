@@ -4,6 +4,9 @@ import com.zsq.blcokchainexplorer.po.TransactionDetail;
 import com.zsq.blcokchainexplorer.po.TransactionDetailKey;
 
 public interface TransactionDetailMapper {
+
+    int truncate();
+
     int deleteByPrimaryKey(TransactionDetailKey key);
 
     int insert(TransactionDetail record);

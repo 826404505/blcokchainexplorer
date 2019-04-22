@@ -15,6 +15,13 @@
   <sql id="Base_Column_List">
     txid, txhash, blockhash, size, weight, time, total_input, total_output, fees
   </sql>
+
+  <!--custom sql-->
+  <update id="truncate">
+      truncate table transaction;
+  </update>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

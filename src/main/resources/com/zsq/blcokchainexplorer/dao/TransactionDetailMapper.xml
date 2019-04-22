@@ -10,6 +10,12 @@
   <sql id="Base_Column_List">
     txid, address, type, amount
   </sql>
+
+  <!--custom sql-->
+  <update id="truncate">
+      truncate table transaction_detail;
+  </update>
+
   <select id="selectByPrimaryKey" parameterType="com.zsq.blcokchainexplorer.po.TransactionDetailKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
