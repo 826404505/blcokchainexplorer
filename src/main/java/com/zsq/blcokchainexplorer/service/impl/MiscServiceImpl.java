@@ -53,17 +53,20 @@ public class MiscServiceImpl implements MiscService {
         //1、首先把hash值取出来
         //2、根据hash值查找指定的block
         //3、然后把block插入到数据库里面
+        //出现的问题是height不按规则的去插入，随机
 
         int height = blockHeight;
         String temphash ="";
+        //Integer firstheight = 0;
 
-        while (height >0){
+
+        while (height > 0){
             //根据height查找temphash
             temphash = bitcoinJsonRpcClient.getBlockHashByHeight(height);
 
             //然后根据blockhash把数据插入到数据库
             //进行循环
-            while (temphash != null && !temphash.isEmpty()){
+            //while (temphash != null && !temphash.isEmpty()){
 
                 //通过api得到block的JSONObject数据
                 JSONObject blockOrigin = bitecoinApi.getBlock(temphash);
@@ -92,13 +95,14 @@ public class MiscServiceImpl implements MiscService {
 
                 //把已经包装好的block插入到数据里面
                 blockMapper.insert(block);
+                if (blockOrigin.getInteger("height")==0){
+                    break;
+                }
+                temphash = blockOrigin.getString("previousblockhash");
+           }
 
-                temphash = blockOrigin.getString("nextblockhash");
-            }
-            height--;
+            //height--;
         }
-
-    }
 
     @Async
     @Override
