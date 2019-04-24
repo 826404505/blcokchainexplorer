@@ -64,12 +64,15 @@ public class BlockController {
     //通过hash查找块的详细信息
     @GetMapping("/getBlockDetailByHash")
     public BlockDetailDTo getBlockDetailByHash(@RequestParam String blockhash){
+        //调用API的方法进数据库里面查找block
+        //Block block = blockMapper.selectByPrimaryKey(blockhash);
         return null;
     }
 
     //通过height查找指定块的详细信息
     @GetMapping("/getBlockDetailByHeight")
     public BlockDetailDTo getBlockDetailByHeight(@RequestParam String blockheight){
+        //调用API的方法进数据库里面查找block
 
         return null;
     }
