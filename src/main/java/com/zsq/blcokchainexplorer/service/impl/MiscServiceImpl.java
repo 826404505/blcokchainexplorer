@@ -42,7 +42,61 @@ public class MiscServiceImpl implements MiscService {
 
     @Async
     @Override
-    public void importFromHeight(Integer blockHeight, Boolean isClean) {
+    public void importFromHeight(Integer blockHeight, Boolean isClean) throws Throwable {
+        //判断数据库是否clean
+        if (isClean) {
+            blockMapper.truncate();
+            transactionMapper.truncate();
+            transactionDetailMapper.truncate();
+        }
+        //循环从输入的开始到0
+        //1、首先把hash值取出来
+        //2、根据hash值查找指定的block
+        //3、然后把block插入到数据库里面
+
+        int height = blockHeight;
+        String temphash ="";
+
+        while (height >0){
+            //根据height查找temphash
+            temphash = bitcoinJsonRpcClient.getBlockHashByHeight(height);
+
+            //然后根据blockhash把数据插入到数据库
+            //进行循环
+            while (temphash != null && !temphash.isEmpty()){
+
+                //通过api得到block的JSONObject数据
+                JSONObject blockOrigin = bitecoinApi.getBlock(temphash);
+                Block block = new Block();
+                //把得到的block赋值给新new的block
+                block.setBlockhash(blockOrigin.getString("hash"));
+
+                //设置id，height，time等一些数据
+                block.setBlockchainId(2);
+                block.setHeight(blockOrigin.getInteger("height"));
+                Long time = blockOrigin.getLong("time");
+                Date date = new Date(time * 1000);
+                block.setTime(date);
+                JSONArray tx = blockOrigin.getJSONArray("tx");
+
+                for (int i =0; i<tx.size(); i++){
+                    importTx(tx.getJSONObject(i),temphash,date);
+                }
+
+                block.setTxSize(tx.size());
+                block.setSizeOnDisk(blockOrigin.getLong("size"));
+                block.setDifficulty(blockOrigin.getDouble("difficulty"));
+                block.setPrevBlockhash(blockOrigin.getString("previousblockhash"));
+                block.setNextBlockhash(blockOrigin.getString("nextblockhash"));
+                block.setMerkleRoot(blockOrigin.getString("merkleroot"));
+
+                //把已经包装好的block插入到数据里面
+                blockMapper.insert(block);
+
+                temphash = blockOrigin.getString("nextblockhash");
+            }
+            height--;
+        }
 
     }
 
