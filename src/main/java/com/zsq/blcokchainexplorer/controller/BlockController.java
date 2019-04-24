@@ -8,16 +8,14 @@ import com.zsq.blcokchainexplorer.dto.BlockListDTO;
 import com.zsq.blcokchainexplorer.po.Block;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/block")
+@CrossOrigin
 public class BlockController {
 
     @Autowired
@@ -45,8 +43,7 @@ public class BlockController {
             return blockListDTO;
         }).collect(Collectors.toList());
 
-
-        return null;
+        return blockListDTOS;
     }
 
     //通过ID查找当前的block
@@ -73,6 +70,7 @@ public class BlockController {
     //通过height查找指定块的详细信息
     @GetMapping("/getBlockDetailByHeight")
     public BlockDetailDTo getBlockDetailByHeight(@RequestParam String blockheight){
+
         return null;
     }
 

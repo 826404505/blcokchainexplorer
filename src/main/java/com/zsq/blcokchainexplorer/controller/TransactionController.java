@@ -24,6 +24,7 @@ public class TransactionController {
     @GetMapping("/getRecentTransactionsByNameType")
     public List<TransactionListDTO> getRecentTransactionsByNameType(@RequestParam String name,
                                                                     @RequestParam String type){
+
         return null;
     }
 

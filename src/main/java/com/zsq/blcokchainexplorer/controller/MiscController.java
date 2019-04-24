@@ -17,6 +17,7 @@ public class MiscController {
     @Autowired
     private MiscService miscService;
 
+    //搜索首先考虑是否是hash，height，还是address，然后再进行查询
     @GetMapping("/search")
     public Object search(@RequestParam String keyword){
 
