@@ -99,10 +99,11 @@ public class MiscServiceImpl implements MiscService {
                     break;
                 }
                 temphash = blockOrigin.getString("previousblockhash");
+
+                height--;
            }
 
-            //height--;
-        }
+    }
 
     @Async
     @Override
