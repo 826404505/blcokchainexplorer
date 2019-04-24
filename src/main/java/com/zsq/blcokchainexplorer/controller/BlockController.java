@@ -1,17 +1,53 @@
 package com.zsq.blcokchainexplorer.controller;
 
+import com.zsq.blcokchainexplorer.api.BitcoinJsonRpcClient;
+import com.zsq.blcokchainexplorer.api.BitecoinApi;
+import com.zsq.blcokchainexplorer.dao.BlockMapper;
 import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
 import com.zsq.blcokchainexplorer.dto.BlockListDTO;
+import com.zsq.blcokchainexplorer.po.Block;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/block")
 public class BlockController {
+
+    @Autowired
+    private BitecoinApi bitecoinApi;
+
+    @Autowired
+    private BitcoinJsonRpcClient bitcoinJsonRpcClient;
+
+    @Autowired
+    private BlockMapper blockMapper;
+
+    @Value("${blockchain.recentCount}")
+    private Integer recentCount;
+
+    @GetMapping("/getRecentBlocks")
+    public List<BlockListDTO> getRecentBlocks(){
+        //从数据库里面查找数据
+        List<Block> blocks = blockMapper.selectRecent();
+        List<BlockListDTO> blockListDTOS = blocks.stream().map(block -> {
+            BlockListDTO blockListDTO = new BlockListDTO();
+            blockListDTO.setHeight(block.getHeight());
+            blockListDTO.setTime(block.getTime());
+            blockListDTO.setTxSize(block.getTxSize());
+            blockListDTO.setSizeOnDisk(block.getSizeOnDisk());
+            return blockListDTO;
+        }).collect(Collectors.toList());
+
+
+        return null;
+    }
 
     //通过ID查找当前的block
     @GetMapping("/getRecentBlocksById")

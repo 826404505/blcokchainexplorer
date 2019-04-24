@@ -2,9 +2,13 @@ package com.zsq.blcokchainexplorer.dao;
 
 import com.zsq.blcokchainexplorer.po.Block;
 
+import java.util.List;
+
 public interface BlockMapper {
 
     int truncate();
+
+    List<Block> selectRecent();
 
     int deleteByPrimaryKey(String blockhash);
 
