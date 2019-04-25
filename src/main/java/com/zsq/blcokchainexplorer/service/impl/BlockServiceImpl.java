@@ -100,6 +100,6 @@ public class BlockServiceImpl implements BlockService {
         transactionInBlockDTOS.add(transaction);
         blockDetailDTo.setTransactions(transactionInBlockDTOS);
 
-        return null;
+        return blockDetailDTo;
     }
 }

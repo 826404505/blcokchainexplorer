@@ -2,6 +2,7 @@ package com.zsq.blcokchainexplorer.controller;
 
 import com.zsq.blcokchainexplorer.api.BitcoinJsonRpcClient;
 import com.zsq.blcokchainexplorer.api.BitecoinApi;
+import com.zsq.blcokchainexplorer.dao.BlockChainMapper;
 import com.zsq.blcokchainexplorer.dao.BlockMapper;
 import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
 import com.zsq.blcokchainexplorer.dto.BlockListDTO;
@@ -30,6 +31,9 @@ public class BlockController {
 
     @Autowired
     private BlockService blockService;
+
+    @Autowired
+    private BlockChainMapper blockChainMapper;
 
     @Value("${blockchain.recentCount}")
     private Integer recentCount;
@@ -61,7 +65,8 @@ public class BlockController {
     @GetMapping("/getRecentBlockByNameType")
     public List<BlockListDTO> getRecentBlockByNameType(@RequestParam String name,
                                                        @RequestParam String type){
-
+        //首先根据name和type找到该blockchain，然后根据查到的blockchain的blockchain_id查找block
+        //blockChainMapper.
         return null;
     }
 
@@ -78,7 +83,7 @@ public class BlockController {
     public BlockDetailDTo getBlockDetailByHeight(@RequestParam Integer blockheight) throws Throwable {
         //调用API的方法进数据库里面查找block
         BlockDetailDTo blockDetailDTo = blockService.getBlockDetailByHeight(blockheight);
-        return null;
+        return blockDetailDTo;
     }
 
 }
