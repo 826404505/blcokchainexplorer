@@ -21,6 +21,21 @@
       truncate table transaction;
   </update>
 
+  <resultMap id="BaseResultMap" type="com.zsq.blcokchainexplorer.po.Transaction">
+    <id column="txid" jdbcType="CHAR" property="txid" />
+    <result column="txhash" jdbcType="CHAR" property="txhash" />
+    <result column="blockhash" jdbcType="CHAR" property="blockhash" />
+    <result column="size" jdbcType="BIGINT" property="size" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+
+  <!--根据hash查找交易信息-->
+  <select id="selectTransactionInBlockDTOByHash" parameterType="java.lang.String" resultMap="com.zsq.blcokchainexplorer.dto.TransactionInBlockDTO">
+    select
+    txid, txhash, size,time,blockhash
+    from transaction
+    where blockhash = #{blockhash}
+  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -28,6 +43,8 @@
     from transaction
     where txid = #{txid,jdbcType=CHAR}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from transaction
     where txid = #{txid,jdbcType=CHAR}

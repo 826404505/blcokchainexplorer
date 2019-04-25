@@ -1,6 +1,7 @@
 package com.zsq.blcokchainexplorer.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class TransactionInBlockDTO {
     private String txid;
@@ -11,8 +12,18 @@ public class TransactionInBlockDTO {
 
     private Date time;
 
+    private String blockhash;
+
     public String getTxid() {
         return txid;
+    }
+
+    public String getBlockhash() {
+        return blockhash;
+    }
+
+    public void setBlockhash(String blockhash) {
+        this.blockhash = blockhash;
     }
 
     public void setTxid(String txid) {

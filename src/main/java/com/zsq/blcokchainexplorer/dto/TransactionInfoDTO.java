@@ -25,4 +25,5 @@ public class TransactionInfoDTO {
 
     //交易详细信息的集合
     private List<TxDetailInTxInfo> txDetails;
+
 }

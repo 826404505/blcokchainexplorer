@@ -1,6 +1,8 @@
 package com.zsq.blcokchainexplorer.dao;
 
+import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
 import com.zsq.blcokchainexplorer.po.Block;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,4 +23,5 @@ public interface BlockMapper {
     int updateByPrimaryKeySelective(Block record);
 
     int updateByPrimaryKey(Block record);
+
 }

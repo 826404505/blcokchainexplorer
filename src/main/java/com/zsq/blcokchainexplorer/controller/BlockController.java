@@ -6,6 +6,7 @@ import com.zsq.blcokchainexplorer.dao.BlockMapper;
 import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
 import com.zsq.blcokchainexplorer.dto.BlockListDTO;
 import com.zsq.blcokchainexplorer.po.Block;
+import com.zsq.blcokchainexplorer.service.BlockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,9 @@ public class BlockController {
 
     @Autowired
     private BlockMapper blockMapper;
+
+    @Autowired
+    private BlockService blockService;
 
     @Value("${blockchain.recentCount}")
     private Integer recentCount;
@@ -61,12 +65,12 @@ public class BlockController {
         return null;
     }
 
-    //通过hash查找块的详细信息
+    //通过hash查找块的详细信息，其中包括交易信息的list
     @GetMapping("/getBlockDetailByHash")
     public BlockDetailDTo getBlockDetailByHash(@RequestParam String blockhash){
-        //调用API的方法进数据库里面查找block
-        //Block block = blockMapper.selectByPrimaryKey(blockhash);
-        return null;
+        //调用service
+        BlockDetailDTo blockDetailDTo = blockService.BlockDetailDToByHash(blockhash);
+        return blockDetailDTo;
     }
 
     //通过height查找指定块的详细信息

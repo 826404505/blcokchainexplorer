@@ -1,5 +1,7 @@
 package com.zsq.blcokchainexplorer.dto;
 
+import com.zsq.blcokchainexplorer.po.Transaction;
+
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class BlockDetailDTo {
 
     private String merkleRoot;
 
-    private List<TransactionInBlockDTO> transactions;
+    private List<Transaction> transactions;
 
     public String getBlockhash() {
         return blockhash;
@@ -119,11 +121,11 @@ public class BlockDetailDTo {
         this.merkleRoot = merkleRoot;
     }
 
-    public List<TransactionInBlockDTO> getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(List<TransactionInBlockDTO> transactions) {
+    public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 }
