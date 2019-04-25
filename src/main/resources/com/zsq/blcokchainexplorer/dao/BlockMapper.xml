@@ -28,7 +28,7 @@
 
   <select id="selectRecent" resultMap="BaseResultMap">
     select
-    <include refid="Base_BlockDetailDto" />
+    <include refid="Base_Column_List" />
     from block
     order by height desc
     limit 5

@@ -37,7 +37,7 @@ public class BlockServiceImpl implements BlockService {
         Block block = blockMapper.selectByPrimaryKey(blockhash);
 
         //根据hash查找TransactionInBlockDTO的信息
-        Transaction transaction = transactionMapper.selectByPrimaryKey(blockhash);
+        Transaction transaction = transactionMapper.selectByBlockhash(blockhash);
 
         //把得到的信息进行封装
         BlockDetailDTo blockDetailDTo = new BlockDetailDTo();

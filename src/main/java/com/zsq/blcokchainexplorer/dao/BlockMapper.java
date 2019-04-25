@@ -18,7 +18,7 @@ public interface BlockMapper {
 
     int insertSelective(Block record);
 
-    Block selectByPrimaryKey(String blockhash);
+    Block selectByPrimaryKey(@Param("blockhash") String blockhash);
 
     int updateByPrimaryKeySelective(Block record);
 

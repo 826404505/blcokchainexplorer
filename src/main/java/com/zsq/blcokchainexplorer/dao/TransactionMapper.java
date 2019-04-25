@@ -16,6 +16,8 @@ public interface TransactionMapper {
 
     Transaction selectByPrimaryKey(String txid);
 
+    Transaction selectByBlockhash(@Param("blcokhash") String blcokhash);
+
     int updateByPrimaryKeySelective(Transaction record);
 
     int updateByPrimaryKey(Transaction record);
