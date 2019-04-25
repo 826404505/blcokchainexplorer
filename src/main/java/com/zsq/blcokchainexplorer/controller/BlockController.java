@@ -75,9 +75,9 @@ public class BlockController {
 
     //通过height查找指定块的详细信息
     @GetMapping("/getBlockDetailByHeight")
-    public BlockDetailDTo getBlockDetailByHeight(@RequestParam String blockheight){
+    public BlockDetailDTo getBlockDetailByHeight(@RequestParam Integer blockheight) throws Throwable {
         //调用API的方法进数据库里面查找block
-
+        BlockDetailDTo blockDetailDTo = blockService.getBlockDetailByHeight(blockheight);
         return null;
     }
 

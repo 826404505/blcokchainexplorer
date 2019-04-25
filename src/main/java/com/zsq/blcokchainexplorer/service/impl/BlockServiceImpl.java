@@ -1,5 +1,6 @@
 package com.zsq.blcokchainexplorer.service.impl;
 
+import com.zsq.blcokchainexplorer.api.BitcoinJsonRpcClient;
 import com.zsq.blcokchainexplorer.dao.BlockMapper;
 import com.zsq.blcokchainexplorer.dao.TransactionMapper;
 import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
@@ -16,6 +17,9 @@ import java.util.List;
 
 @Service
 public class BlockServiceImpl implements BlockService {
+
+    @Autowired
+    private BitcoinJsonRpcClient bitcoinJsonRpcClient;
 
     @Autowired
     private BlockMapper blockMapper;
@@ -58,5 +62,44 @@ public class BlockServiceImpl implements BlockService {
         blockDetailDTo.setTransactions(transactionInBlockDTOS);
 
         return blockDetailDTo;
+    }
+
+    /**
+     * 根据height查找block
+     * @param blockheight
+     * @return
+     */
+    @Override
+    public BlockDetailDTo getBlockDetailByHeight(Integer blockheight) throws Throwable {
+        //1、利用height得到hash值
+        //2、根据hash值查找block的信息
+        //3、然后再根据hash值查找TransactionInBlockDTO的交易信息
+
+        //根据height查找blockhash
+        String blockHashByHeight = bitcoinJsonRpcClient.getBlockHashByHeight(blockheight);
+        Block block = blockMapper.selectByPrimaryKey(blockHashByHeight);
+
+        //根据hash查找TransactionInBlockDTO的信息
+        Transaction transaction = transactionMapper.selectByBlockhash(blockHashByHeight);
+
+        //把得到的信息进行封装
+        BlockDetailDTo blockDetailDTo = new BlockDetailDTo();
+        blockDetailDTo.setBlockhash(block.getBlockhash());
+        blockDetailDTo.setDifficulty(block.getDifficulty());
+        blockDetailDTo.setHeight(block.getHeight());
+        blockDetailDTo.setTime(block.getTime());
+        blockDetailDTo.setMerkleRoot(block.getMerkleRoot());
+        blockDetailDTo.setTxSize(block.getTxSize());
+        blockDetailDTo.setPrevBlockhash(block.getPrevBlockhash());
+        blockDetailDTo.setNextBlockhash(block.getNextBlockhash());
+        blockDetailDTo.setOutputTotal(block.getOutputTotal());
+        blockDetailDTo.setTransactionFees(block.getTransactionFees());
+
+        ArrayList<Transaction> transactionInBlockDTOS = new ArrayList<>();
+
+        transactionInBlockDTOS.add(transaction);
+        blockDetailDTo.setTransactions(transactionInBlockDTOS);
+
+        return null;
     }
 }
