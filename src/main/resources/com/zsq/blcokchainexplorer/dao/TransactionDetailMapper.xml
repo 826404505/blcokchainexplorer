@@ -16,6 +16,16 @@
       truncate table transaction_detail;
   </update>
 
+
+  <!--根据txid查询-->
+  <select id="selectByTxid" parameterType="java.lang.String" resultType="com.zsq.blcokchainexplorer.dto.TxDetailInTxInfo">
+    select
+    address,type,amount
+    from transaction_detail
+    where txid = #{txid}
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="com.zsq.blcokchainexplorer.po.TransactionDetailKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

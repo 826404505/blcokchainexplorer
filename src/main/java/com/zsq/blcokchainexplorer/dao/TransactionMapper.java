@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 public interface TransactionMapper {
 
+
+
     int truncate();
 
     int deleteByPrimaryKey(String txid);
@@ -23,4 +25,6 @@ public interface TransactionMapper {
     int updateByPrimaryKey(Transaction record);
 
     TransactionInBlockDTO selectTransactionInBlockDTOByHash(@Param("blockhash") String blockhash);
+
+    Transaction selectByTxhash(String txid);
 }

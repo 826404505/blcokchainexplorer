@@ -21,6 +21,14 @@
       truncate table transaction;
   </update>
 
+  <!--根据txhash查找-->
+  <select id="selectByTxhash" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from transaction
+    where txhash = #{txhash}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -28,12 +36,14 @@
     where txid = #{txid,jdbcType=CHAR}
   </select>
 
+  <!--根据blockhash查找-->
   <select id="selectByBlockhash" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from transaction
     where blockhash = #{blcokhash}
   </select>
+
 
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">

@@ -1,11 +1,16 @@
 package com.zsq.blcokchainexplorer.dao;
 
+import com.zsq.blcokchainexplorer.dto.TxDetailInTxInfo;
 import com.zsq.blcokchainexplorer.po.TransactionDetail;
 import com.zsq.blcokchainexplorer.po.TransactionDetailKey;
+
+import java.util.List;
 
 public interface TransactionDetailMapper {
 
     int truncate();
+
+    List<TxDetailInTxInfo> selectByTxid(String txid);
 
     int deleteByPrimaryKey(TransactionDetailKey key);
 
