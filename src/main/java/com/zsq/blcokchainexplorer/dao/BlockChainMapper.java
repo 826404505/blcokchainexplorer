@@ -1,6 +1,7 @@
 package com.zsq.blcokchainexplorer.dao;
 
 import com.zsq.blcokchainexplorer.po.BlockChain;
+import org.apache.ibatis.annotations.Param;
 
 public interface BlockChainMapper {
     int deleteByPrimaryKey(Integer blockchainId);
@@ -15,5 +16,5 @@ public interface BlockChainMapper {
 
     int updateByPrimaryKey(BlockChain record);
 
-    Integer getBlockchainIdByNameAndType(String name, String type);
+    Integer getBlockchainIdByNameAndType(@Param("name") String name, @Param("type") String type);
 }

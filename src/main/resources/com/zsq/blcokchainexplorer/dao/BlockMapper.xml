@@ -26,9 +26,16 @@
       truncate table block;
   </update>
 
-  <select id="getBlockListDTOByBlockchainId" parameterType="int" resultType="com.zsq.blcokchainexplorer.dto.BlockListDTO">
+  <resultMap id="ListMap" type="com.zsq.blcokchainexplorer.dto.BlockListDTO">
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="tx_size" jdbcType="INTEGER" property="txSize" />
+    <result column="size_on_disk" jdbcType="BIGINT" property="sizeOnDisk" />
+  </resultMap>
+
+  <select id="getBlockListDTOByBlockchainId" parameterType="int" resultMap="ListMap">
     select
-    height, time, txSize, sizeOnDisk
+    height, time, tx_size, size_on_disk
     from block
     where blockchain_id = #{blockchainId}
   </select>

@@ -3,6 +3,7 @@ package com.zsq.blcokchainexplorer.po;
 import java.util.Date;
 
 public class Block {
+
     private String blockhash;
 
     private Integer blockchainId;

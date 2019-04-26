@@ -18,10 +18,10 @@
     from blockchain
     <where>
       <if test="name != ''">
-        name = #{name,jdbcType=VARCHAR},
+        and name = #{name}
       </if>
       <if test="type != ''">
-        type = #{type,jdbcType=VARCHAR},
+        and type = #{type}
       </if>
     </where>
 
