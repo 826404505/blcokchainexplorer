@@ -63,8 +63,8 @@ public class BlockController {
 
     //通过name和type查找当前的block
     @GetMapping("/getRecentBlockByNameType")
-    public List<BlockListDTO> getRecentBlockByNameType(@RequestParam String name,
-                                                       @RequestParam String type){
+    public List<BlockListDTO> getRecentBlockByNameType(@RequestParam(required = false, defaultValue = "") String name,
+                                                       @RequestParam(required = false, defaultValue = "") String type){
         //首先根据name和type找到该blockchain，然后根据查到的blockchain的blockchain_id查找block
         Integer blockchainId = blockChainMapper.getBlockchainIdByNameAndType(name, type);
 
