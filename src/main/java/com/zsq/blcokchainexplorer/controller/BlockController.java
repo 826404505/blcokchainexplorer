@@ -66,8 +66,12 @@ public class BlockController {
     public List<BlockListDTO> getRecentBlockByNameType(@RequestParam String name,
                                                        @RequestParam String type){
         //首先根据name和type找到该blockchain，然后根据查到的blockchain的blockchain_id查找block
-        //blockChainMapper.
-        return null;
+        Integer blockchainId = blockChainMapper.getBlockchainIdByNameAndType(name, type);
+
+        //然后根据blockchainId在block表里面查找List<BlockListDTO>
+        List<BlockListDTO> blockListDTOS = blockService.getBlockListByBlockchainId(blockchainId);
+
+        return blockListDTOS;
     }
 
     //通过hash查找块的详细信息，其中包括交易信息的list

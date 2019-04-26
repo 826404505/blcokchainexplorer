@@ -10,6 +10,24 @@
   <sql id="Base_Column_List">
     blockchain_id, name, type, shortname
   </sql>
+
+  <!--根据name和type查找blockchainId-->
+  <select id="getBlockchainIdByNameAndType" parameterType="java.lang.String" resultType="int">
+    select
+    blockchain_id
+    from blockchain
+    <where>
+      <if test="name != ''">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != ''">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </where>
+
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

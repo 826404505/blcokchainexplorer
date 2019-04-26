@@ -1,6 +1,6 @@
 package com.zsq.blcokchainexplorer.dao;
 
-import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
+import com.zsq.blcokchainexplorer.dto.BlockListDTO;
 import com.zsq.blcokchainexplorer.po.Block;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,5 +23,7 @@ public interface BlockMapper {
     int updateByPrimaryKeySelective(Block record);
 
     int updateByPrimaryKey(Block record);
+
+    List<BlockListDTO> getBlockListDTOByBlockchainId(Integer blockchainId);
 
 }

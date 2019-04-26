@@ -26,6 +26,13 @@
       truncate table block;
   </update>
 
+  <select id="getBlockListDTOByBlockchainId" parameterType="int" resultType="com.zsq.blcokchainexplorer.dto.BlockListDTO">
+    select
+    height, time, txSize, sizeOnDisk
+    from block
+    where blockchain_id = #{blockchainId}
+  </select>
+
   <select id="selectRecent" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

@@ -15,5 +15,5 @@ public interface BlockChainMapper {
 
     int updateByPrimaryKey(BlockChain record);
 
-    //interface getBlockchainIdByNameAndType(String name, String type);
+    Integer getBlockchainIdByNameAndType(String name, String type);
 }

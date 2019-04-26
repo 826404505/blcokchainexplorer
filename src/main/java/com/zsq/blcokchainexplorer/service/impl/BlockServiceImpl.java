@@ -4,6 +4,7 @@ import com.zsq.blcokchainexplorer.api.BitcoinJsonRpcClient;
 import com.zsq.blcokchainexplorer.dao.BlockMapper;
 import com.zsq.blcokchainexplorer.dao.TransactionMapper;
 import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
+import com.zsq.blcokchainexplorer.dto.BlockListDTO;
 import com.zsq.blcokchainexplorer.dto.TransactionInBlockDTO;
 import com.zsq.blcokchainexplorer.po.Block;
 import com.zsq.blcokchainexplorer.po.Transaction;
@@ -101,5 +102,17 @@ public class BlockServiceImpl implements BlockService {
         blockDetailDTo.setTransactions(transactionInBlockDTOS);
 
         return blockDetailDTo;
+    }
+
+    /**
+     * 根据blockchainId查找blockList的集合
+     * @param blockchainId
+     * @return
+     */
+    @Override
+    public List<BlockListDTO> getBlockListByBlockchainId(Integer blockchainId) {
+        List<BlockListDTO> blockListDTOByBlockchainId = blockMapper.getBlockListDTOByBlockchainId(blockchainId);
+
+        return blockListDTOByBlockchainId;
     }
 }
