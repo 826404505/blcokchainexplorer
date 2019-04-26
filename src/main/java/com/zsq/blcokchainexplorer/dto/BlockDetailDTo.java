@@ -33,6 +33,24 @@ public class BlockDetailDTo {
 
     private List<Transaction> transactions;
 
+    public BlockDetailDTo() {
+    }
+
+    public BlockDetailDTo(String blockhash, Integer height, Date time, Integer txSize, Long sizeOnDisk, Double difficulty, String prevBlockhash, String nextBlockhash, Double outputTotal, Double transactionFees, String merkleRoot, List<Transaction> transactions) {
+        this.blockhash = blockhash;
+        this.height = height;
+        this.time = time;
+        this.txSize = txSize;
+        this.sizeOnDisk = sizeOnDisk;
+        this.difficulty = difficulty;
+        this.prevBlockhash = prevBlockhash;
+        this.nextBlockhash = nextBlockhash;
+        this.outputTotal = outputTotal;
+        this.transactionFees = transactionFees;
+        this.merkleRoot = merkleRoot;
+        this.transactions = transactions;
+    }
+
     public String getBlockhash() {
         return blockhash;
     }

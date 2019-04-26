@@ -1,6 +1,8 @@
 package com.zsq.blcokchainexplorer.controller;
 
+import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
 import com.zsq.blcokchainexplorer.dto.ImportStateDTO;
+import com.zsq.blcokchainexplorer.service.BlockService;
 import com.zsq.blcokchainexplorer.service.MiscService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -17,12 +19,24 @@ public class MiscController {
     @Autowired
     private MiscService miscService;
 
+    @Autowired
+    private BlockService blockService;
+
     //搜索首先考虑是否是hash，height，还是address，然后再进行查询
     @GetMapping("/search")
-    public Object search(@RequestParam String keyword){
+    public Object search(@RequestParam String keyword) throws Throwable {
         //1、首先判断是hash，height，address
-        //2、然后根据
-        return null;
+        //2、然后根据是hash，height，address调用该方法查找
+        if (keyword.length() < 7){//是属于height
+            //调用根据height查找
+            BlockDetailDTo blockDetailByHeight = blockService.getBlockDetailByHeight(Integer.parseInt(keyword));
+            return blockDetailByHeight;
+        }else {//是hash
+            //根据hash查找
+            BlockDetailDTo blockDetailDTo = blockService.BlockDetailDToByHash(keyword);
+            return blockDetailDTo;
+        }
+
     }
 
     //通过height插入
