@@ -54,11 +54,12 @@ public class BlockController {
         return blockListDTOS;
     }
 
-    //通过ID查找当前的block
+    //通过blockChinID查找当前的block
     @GetMapping("/getRecentBlocksById")
     public List<BlockListDTO> getRecentBlocksById(@RequestParam Integer blockchainId){
+        List<BlockListDTO> blockListDTOByBlockchainId = blockMapper.getBlockListDTOByBlockchainId(blockchainId);
 
-        return null;
+        return blockListDTOByBlockchainId;
     }
 
     //通过name和type查找当前的block

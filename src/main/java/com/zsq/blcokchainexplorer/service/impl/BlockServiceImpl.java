@@ -5,7 +5,6 @@ import com.zsq.blcokchainexplorer.dao.BlockMapper;
 import com.zsq.blcokchainexplorer.dao.TransactionMapper;
 import com.zsq.blcokchainexplorer.dto.BlockDetailDTo;
 import com.zsq.blcokchainexplorer.dto.BlockListDTO;
-import com.zsq.blcokchainexplorer.dto.TransactionInBlockDTO;
 import com.zsq.blcokchainexplorer.po.Block;
 import com.zsq.blcokchainexplorer.po.Transaction;
 import com.zsq.blcokchainexplorer.service.BlockService;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
