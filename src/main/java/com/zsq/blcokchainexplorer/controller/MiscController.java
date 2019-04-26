@@ -20,7 +20,8 @@ public class MiscController {
     //搜索首先考虑是否是hash，height，还是address，然后再进行查询
     @GetMapping("/search")
     public Object search(@RequestParam String keyword){
-
+        //1、首先判断是hash，height，address
+        //2、然后根据
         return null;
     }
 

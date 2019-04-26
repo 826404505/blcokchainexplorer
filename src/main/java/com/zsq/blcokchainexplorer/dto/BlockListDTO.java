@@ -6,6 +6,7 @@ public class BlockListDTO {
     /**
      * 存装block集合的DTO
      */
+    private String blockhash;
     private Integer height;
     private Date time;
     private Integer txSize;
@@ -41,5 +42,13 @@ public class BlockListDTO {
 
     public void setSizeOnDisk(Long sizeOnDisk) {
         this.sizeOnDisk = sizeOnDisk;
+    }
+
+    public String getBlockhash() {
+        return blockhash;
+    }
+
+    public void setBlockhash(String blockhash) {
+        this.blockhash = blockhash;
     }
 }

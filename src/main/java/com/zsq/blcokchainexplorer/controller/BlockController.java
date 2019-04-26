@@ -44,6 +44,7 @@ public class BlockController {
         List<Block> blocks = blockMapper.selectRecent();
         List<BlockListDTO> blockListDTOS = blocks.stream().map(block -> {
             BlockListDTO blockListDTO = new BlockListDTO();
+            blockListDTO.setBlockhash(block.getBlockhash());
             blockListDTO.setHeight(block.getHeight());
             blockListDTO.setTime(block.getTime());
             blockListDTO.setTxSize(block.getTxSize());
