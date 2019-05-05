@@ -30,7 +30,15 @@
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
+  select
+  <include refid="Base_Column_List" />
+  from transaction
+  where txid = #{txid,jdbcType=CHAR}
+</select>
+
+  <!--根据txid查找返回一个集合List-->
+  <select id="selectByTxidList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from transaction
     where txid = #{txid,jdbcType=CHAR}

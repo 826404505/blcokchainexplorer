@@ -4,6 +4,8 @@ import com.zsq.blcokchainexplorer.dto.TransactionInBlockDTO;
 import com.zsq.blcokchainexplorer.po.Transaction;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface TransactionMapper {
 
 
@@ -27,4 +29,6 @@ public interface TransactionMapper {
     TransactionInBlockDTO selectTransactionInBlockDTOByHash(@Param("blockhash") String blockhash);
 
     Transaction selectByTxhash(String txid);
+
+    List<Transaction> selectByTxidList(String txid);
 }

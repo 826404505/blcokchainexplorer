@@ -1,5 +1,6 @@
 package com.zsq.blcokchainexplorer.dao;
 
+import com.zsq.blcokchainexplorer.dto.TransactionInfoByAddress;
 import com.zsq.blcokchainexplorer.dto.TxDetailInTxInfo;
 import com.zsq.blcokchainexplorer.po.TransactionDetail;
 import com.zsq.blcokchainexplorer.po.TransactionDetailKey;
@@ -23,4 +24,7 @@ public interface TransactionDetailMapper {
     int updateByPrimaryKeySelective(TransactionDetail record);
 
     int updateByPrimaryKey(TransactionDetail record);
+
+    /*根据address查找一笔交易细节*/
+    List<TransactionInfoByAddress> selectTxDetailByAddress(String address);
 }

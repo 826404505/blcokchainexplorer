@@ -16,6 +16,29 @@
       truncate table transaction_detail;
   </update>
 
+  <resultMap id="TxDetailMap" type="com.zsq.blcokchainexplorer.dto.TransactionInfoByAddress">
+    <id column="txid" jdbcType="CHAR" property="txid" />
+    <id column="address" jdbcType="VARCHAR" property="address" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <collection property="transactions" column="txid" javaType="ArrayList" ofType="com.zsq.blcokchainexplorer.po.Transaction" select="selectTxByTxid"/>
+  </resultMap>
+
+  <!--根据address查询交易的详细信息-->
+  <select id="selectTxDetailByAddress" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    txid,address,type,amount
+    from transaction_detail
+    where address = #{address}
+  </select>
+
+  <!--根据txid查询transaction信息-->
+ <!-- <select id="selectTxByTxid" parameterType="java.lang.String" resultType="com.zsq.blcokchainexplorer.po.Transaction">
+    select
+    txid, txhash, blockhash, size, weight, time, total_input, total_output, fees
+    from transaction
+    where txid = #{txid}
+  </select>-->
 
   <!--根据txid查询-->
   <select id="selectByTxid" parameterType="java.lang.String" resultType="com.zsq.blcokchainexplorer.dto.TxDetailInTxInfo">
